@@ -3,6 +3,7 @@ from django.db import models
 from django.core.files.base import ContentFile
 import os
 
+
 # 生成密钥，实际应用中应该保存这个密钥
 # key = Fernet.generate_key()
 # cipher_suite = Fernet(key)
@@ -39,15 +40,15 @@ class EncryptedFileField(models.FileField):
 
             # 保存加密文件
             # file_name = self.generate_filename(model_instance, os.path.basename(file.name))
-            if hasattr(model_instance,'image'):
+            if hasattr(model_instance, 'image'):
                 file_name = model_instance.image.name
-            elif hasattr(model_instance,'video'):
+            elif hasattr(model_instance, 'video'):
                 file_name = model_instance.video.name
 
             file.save(file_name, encrypted_file, save=False)
 
         return super().pre_save(model_instance, add)
-    
+
     # def pre_save(self, model_instance, add):
     #     # file_field = super().pre_save(model_instance, add)
     #     file_field = getattr(model_instance, self.attname)
@@ -67,10 +68,9 @@ class EncryptedFileField(models.FileField):
     #     self.cipher_suite = Fernet(self.fernet_key)
     #     super().__init__(*args, **kwargs)
 
-
     # def save_form_data(self, instance, data):
     #     # 检查是否有新文件上传
-        
+
     #     if data and hasattr(data, 'read'):
     #         # 加密文件内容
     #         original_file_content = data.read()
@@ -84,5 +84,5 @@ class EncryptedFileField(models.FileField):
 
     #     super().save_form_data(instance, encrypted_file)
 
-    def get_encryption_key():
+    def get_encryption_key(self):
         return EncryptedFileField.fernet_key

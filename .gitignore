@@ -161,3 +161,4 @@ cython_debug/
 
 # mac
 .DS_Store
+/.idea/modules.xml

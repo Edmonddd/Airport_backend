@@ -1,11 +1,12 @@
 import json
 from rest_framework.renderers import BaseRenderer
 
+
 class CustomJSONRenderer(BaseRenderer):
     media_type = 'application/json'
     format = 'json'
 
-        # 重构render方法
+    # 重构render方法
     def render(self, data, accepted_media_type=None, renderer_context=None):
         if renderer_context:
             if isinstance(data, dict):
@@ -31,7 +32,7 @@ class CustomJSONRenderer(BaseRenderer):
                 'data': data,
             }
             # 返回JSON数据
-            ret = json.dumps(ret,indent=4)
+            ret = json.dumps(ret, indent=4)
             return ret
         else:
             return data
