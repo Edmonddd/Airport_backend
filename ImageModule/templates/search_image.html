@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Search</title>
+</head>
+<body>
+    <h1>Search for Images</h1>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit" name="search">Search</button>
+    </form>
+
+    {% if images %}
+        <h2>Search Results</h2>
+        <div>
+            {% for image in images %}
+                <div>
+                    <h3>{{ image.name }}</h3>
+                    <p>Date: {{ image.date }}</p>
+                    <p>Type: {{ image.type }}</p>
+                    <img src="{{ image.url }}" alt="{{ image.name }}" style="max-width: 300px; max-height: 300px;">
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

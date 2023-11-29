@@ -1,0 +1,12 @@
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit" name="search">Search</button>
+</form>
+
+{% if videos %}
+    <ul>
+        {% for video in videos %}
+            <li>{{ video.name }} - {{ video.upload_date }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
